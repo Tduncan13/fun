@@ -26,14 +26,12 @@ Password *createPassword(std::string s){
 
 	Password *pw = new Password();
 
-	// Split string by spaces
 	std::stringstream ss(s);
 	std::istream_iterator<std::string> begin(ss);
 	std::istream_iterator<std::string> end;
 	std::vector<std::string> vstrings(begin, end);
 	std::copy(vstrings.begin(), vstrings.end(), vstrings.begin());
 
-	// Split string on dash
 	size_t pos = 0;
 	std::string r = vstrings.at(0);
 	std::string delimeter = "-";
@@ -45,14 +43,12 @@ Password *createPassword(std::string s){
 
 	pw->range.push_back(std::stoi(vstrings.at(0)));
 		
-	// Remove colon
 	delimeter = ":";
 	while((pos = vstrings.at(1).find(delimeter)) != std::string::npos){
 		pw->c = vstrings.at(1).substr(0, pos);
 		vstrings.at(1).erase(0, pos + delimeter.length());
 	}
 
-	// Create Password
 	pw->pw = vstrings.at(2);
 
 	return pw;
@@ -62,21 +58,6 @@ int main(int argc, char **argv){
 	std::ifstream infile(argv[1]);
 	std::string line;
 	int count = 0;
-
-	// sample line: 
-	// 	1-3 a: abcde
-	//
-	// step 1: split on space
-	// - 1-3
-	// - a:
-	// - abcde
-	//
-	//
-	// step 2: split on "-"
-	//
-	// step 3: remove ":"
-	//
-	// step 4: check if password is valid
 
 	while(std::getline(infile, line)){
 		Password *pw = createPassword(line);
