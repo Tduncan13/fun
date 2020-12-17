@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/Chico55/Development/fun/C++/self_driving/src/main.cpp
+iostream
+-
+Vector2.h
+/Users/Chico55/Development/fun/C++/self_driving/src/Vector2.h
+
+headers/Vector2.h
+
