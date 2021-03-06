@@ -18,7 +18,6 @@ if __name__ == '__main__':
             continue
 
         for letter in line:
-            print(letter)
             q[ord(letter) - 97] = 1
 
     t = [x for x in q if x == 1]
