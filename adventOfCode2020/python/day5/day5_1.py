@@ -1,34 +1,28 @@
 #!/usr/local/bin/python
-
 import sys
 
 def process_line(line):
-    rows = [x for x in range(128)]
-    row_ptr1 = 0
-    row_ptr2 = 127
-    col_ptr1 = 0
-    col_ptr2 = 7
+    row_range = [0, 127]
+    col_range = [0, 7]
     row = 0
     col = 0
+
     for letter in line:
         if letter == 'F':
-            row_ptr2 -= (row_ptr2 - row_ptr1) // 2 + 1
-            row = row_ptr2
+            row_range[1] -= (row_range[1] - row_range[0]) // 2 + 1
+            row = row_range[1]
         if letter == 'B':
-            row_ptr1 += (row_ptr2 - row_ptr1) // 2 + 1
-            row = row_ptr1
+            row_range[0] += (row_range[1] - row_range[0]) // 2 + 1
+            row = row_range[0]
 
         if letter == 'L':
-            col_ptr2 -= (col_ptr2 - col_ptr1) // 2 + 1
-            col = col_ptr2
+            col_range[1] -= (col_range[1] - col_range[0]) // 2 + 1
+            col = col_range[1]
         
         if letter == 'R':
-            col_ptr1 += (col_ptr2 - col_ptr1) // 2 + 1
-            col = col_ptr1
+            col_range[0] += (col_range[1] - col_range[0]) // 2 + 1
+            col = col_range[0]
 
-    print(f'Row pointers: {row_ptr1} {row_ptr2}')
-    print(f'Col pointers: {col_ptr1} {col_ptr2}')
-            
     return row * 8 + col
 
 def find_seat(lines):
@@ -43,9 +37,7 @@ def find_seat(lines):
         
 if __name__ == '__main__':
     fo = open(sys.argv[1], 'r')
-
     lines = fo.readlines()
-  
     fo.close()
     find_seat(lines)
 
